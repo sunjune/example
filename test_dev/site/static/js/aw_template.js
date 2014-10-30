@@ -135,6 +135,21 @@ var AW_TEMPLATE = {
 			'</form>'+
 		'</div>',
 
+	'diaryCommentBox' :
+		'<div class="aw-diary-comment-box clearfix">'+
+			'<form action="'+ G_BASE_URL +'/diary/ajax/save_comment/" onsubmit="return false;" method="post">'+
+				'<div class="aw-mod-body">'+
+					'<input type="hidden" name="at_uid" value="{{at_uid}}">'+
+					'<input type="hidden" name="post_hash" value="' + G_POST_HASH + '" />'+
+					'<input type="hidden" name="diary_id" value="{{diary_id}}" />'+
+					'<textarea placeholder="' + _t('写下你的评论...') + '" class="form-control" id="comment_editor" name="message" rows="2"></textarea>'+
+				'</div>'+
+				'<div class="aw-mod-footer">'+
+					'<a href="javascript:;" onclick="ajax_post($(this).parents(\'form\'));" class="btn btn-large btn-success pull-right btn-submit">' + _t('回复') + '</a>'+
+				'</div>'+
+			'</form>'+
+		'</div>',
+
 	'favoriteBox' : 
 			'<div class="modal hide fade alert-box aw-favorite-box">'+
 				'<div class="modal-dialog">'+
@@ -313,6 +328,19 @@ var AW_TEMPLATE = {
 			'</div>'+
 		'</div>',
 			
+	'editSurgeryTypeBox' : 
+		'<div class="aw-edit-topic-box form-inline">'+
+			'<input type="text" class="form-control surgery-type" id="aw_edit_topic_title" autocomplete="off"  placeholder="' + _t('创建或搜索添加新类型') + '...">'+
+			'<a class="btn btn-large btn-success submit-edit">' + _t('添加') + '</a>'+
+			'<a class="btn btn-large btn-default close-edit">' + _t('取消') + '</a>'+
+			'<div class="aw-dropdown">'+
+				'<i class="aw-icon i-dropdown-triangle active"></i>'+
+				'<p class="title">' + _t('没有找到相关结果') + '</p>'+
+				'<ul class="aw-dropdown-list">'+
+				'</ul>'+
+			'</div>'+
+		'</div>',
+
 	'ajaxData' :
 		'<div class="modal fade alert-box aw-topic-edit-note-box aw-question-edit" aria-labelledby="myModalLabel" role="dialog">'+
 			'<div class="modal-dialog">'+
@@ -393,10 +421,16 @@ var AW_TEMPLATE = {
 		'<li class="user clearfix"><a href="{{url}}"><img src="{{img}}" />{{name}}<span class="aw-hide-txt">{{intro}}</span></a></li>',
 	'searchDropdownListArticles' : 
 		'<li class="question clearfix"><a class="aw-hide-txt pull-left" href="{{url}}">{{content}} </a><span class="pull-right aw-text-color-999">{{comments}} ' + _t('条评论') + '</span></li>',
+	'searchDropdownListDiarys' : 
+		'<li class="question clearfix"><a class="aw-hide-txt pull-left" href="{{url}}">{{content}} </a><span class="pull-right aw-text-color-999">{{comments}} ' + _t('条评论') + '</span></li>',
 	'inviteDropdownList' :
 		'<li class="user"><a data-id="{{uid}}" data-value="{{name}}"><img class="img" src="{{img}}" />{{name}}</a></li>',
-	'editTopicDorpdownList' : 
+	'editTopicDropdownList' : 
 		'<li class="question"><a>{{name}}</a></li>',
+	'editDoctorDropdownList' : 
+		'<li class="question" doctorid="{{search_id}}"><a>{{name}}</a></li>',
+	'editHospitalDropdownList' : 
+		'<li class="question" hospitalid="{{search_id}}"><a>{{name}}</a></li>',
 	'questionRedirectList' : 
 		'<li class="question"><a class="aw-hide-txt" onclick="ajax_request({{url}})">{{name}}</a></li>',
 	'questionDropdownList' : 

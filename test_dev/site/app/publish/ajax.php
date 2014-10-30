@@ -66,7 +66,11 @@ class ajax extends AWS_CONTROLLER
 			case 'article':
 				$item_type = 'article';
 			break;
-			
+
+			case 'diary':
+				$item_type = 'diary';
+				break;
+					
 			default:
 				$item_type = 'answer';
 				
@@ -201,7 +205,7 @@ class ajax extends AWS_CONTROLLER
 				
 				// 加载水印和原图
 				$st_font_filename = dirname($_SERVER['DOCUMENT_ROOT']) . '/pub/images/simsun.ttc';  //字体文件
-				$st_stamp = imagecreatefrompng( dirname($_SERVER['DOCUMENT_ROOT']) . '/pub/images/zhengxingji_stamp.png');  //小图
+				$st_logo = imagecreatefrompng( dirname($_SERVER['DOCUMENT_ROOT']) . '/pub/images/zhengxingji_stamp.png');  //小图
 				//$st_stamp_l = imagecreatefrompng( dirname($_SERVER['DOCUMENT_ROOT']) . '/pub/images/zhengxingji_stamp_l.png');  //大图
 				
 				//按图片类型调用相应的函数
@@ -218,24 +222,25 @@ class ajax extends AWS_CONTROLLER
 					case 'gif':
 						$st_im = imagecreatefromgif($upload_data['full_path']);
 						break;
-				
 					default:
 						$st_im = imagecreatefromjpeg($upload_data['full_path']);
 						break;
 				}
 
-				// 文字图片
-				$st_textcolor = imagecolorallocate($st_im, 255, 255, 255);
-				$st_textshadow = imagecolorallocate($st_im, 66, 66, 66);
-
-				// 设置水印的边距并获取水印图片的高/宽
+				// 设置间距
 				$st_marge_right = 10;	//水印距原图右边空白
 				$st_marge_bottom = 10;	//水印距原图底部空白
 				$st_marge_stamp_text = 4;  //图片和文字间隔
-				$st_sx = imagesx($st_stamp);	//水印宽度
-				$st_sy = imagesy($st_stamp);	//水印高度
 
-				// 将文字写到原图上
+				// 获取logo宽高
+				$st_logo_width = imagesx($st_logo);	//logo宽度
+				$st_logo_height = imagesy($st_logo);	//logo高度
+
+				// 文字颜色和阴影颜色
+				$st_textcolor = imagecolorallocate($st_im, 255, 255, 255);
+				$st_textshadow = imagecolorallocate($st_im, 66, 66, 66);
+
+				// 设置文字大小并获取文字宽高
 				$st_font_size = 10;
 				$st_font_angle = 0;
 				$st_font_text = $this->user_info['user_name'];
@@ -244,19 +249,35 @@ class ajax extends AWS_CONTROLLER
 				$st_font_width = abs($st_font_box[4] - $st_font_box[0]);	//文字宽度
 				$st_font_height = abs($st_font_box[5] - $st_font_box[1]);	//文字高度
 
-				//计算水印图片和文字在原图上位置
-				$st_stamp_left = imagesx($st_im) - $st_sx - $st_marge_stamp_text - $st_font_width - $st_marge_right;
-				$st_stamp_top = imagesy($st_im) - $st_sy - $st_marge_bottom;
+				// 计算水印（logo+间距+文字）的大小
+				$st_stamp_width = $st_logo_width + $st_marge_stamp_text + $st_font_width + 2;
+				$st_stamp_height = max($st_logo_height, $st_font_height) + 2;
 
-				$st_stamp_text_left = imagesx($st_im) - $st_font_width - $st_marge_right;
-				$st_stamp_text_top = imagesy($st_im) - $st_marge_bottom - 4;
+				// 计算水印在原图位置
+				$st_stamp_left = imagesx($st_im) - $st_marge_right - $st_stamp_width;
+				$st_stamp_top  = imagesy($st_im) - $st_marge_bottom - $st_stamp_height;
+				
+				// 计算水印图片和文字在水印图上位置
+				$st_logo_left = 0;
+				$st_logo_top = $st_stamp_height - $st_logo_height;
 
-				imagettftext ( $st_im, $st_font_size, $st_font_angle, $st_stamp_text_left+1, $st_stamp_text_top+1, $st_textshadow, $st_font_filename, $st_font_text );
-				imagettftext ( $st_im, $st_font_size, $st_font_angle, $st_stamp_text_left, $st_stamp_text_top, $st_textcolor , $st_font_filename, $st_font_text );
+				$st_text_left = $st_stamp_width - $st_font_width - 2;
+				$st_text_top = $st_stamp_height - $st_font_height + $st_font_size;
 
-				// 使用边距和原图宽度计算水印位置
-				// 把水印复制到原图上
-				imagecopy($st_im, $st_stamp, $st_stamp_left, $st_stamp_top, 0, 0, imagesx($st_stamp), imagesy($st_stamp));
+				// 创建水印图片
+				$st_stamp = imagecreatetruecolor($st_stamp_width, $st_stamp_height);
+				// 截取原图用于水印背景
+				imagecopy($st_stamp, $st_im, 0, 0, $st_stamp_left, $st_stamp_top, $st_stamp_width, $st_stamp_height);
+
+				// 把logo叠加到水印上
+				imagecopy($st_stamp, $st_logo, $st_logo_left, $st_logo_top, 0, 0, $st_logo_width, $st_logo_height);
+
+				// 把文字叠加到水印上
+				imagettftext( $st_stamp, $st_font_size, $st_font_angle, $st_text_left+1, $st_text_top+1, $st_textshadow, $st_font_filename, $st_font_text );
+				imagettftext( $st_stamp, $st_font_size, $st_font_angle, $st_text_left, $st_text_top, $st_textcolor , $st_font_filename, $st_font_text );
+
+				// 把水印叠加到原图上
+				imagecopymerge($st_im, $st_stamp, $st_stamp_left, $st_stamp_top, 0, 0, $st_stamp_width, $st_stamp_height, 70);
 
 				// 输出并清空内存
 				switch ($upload_data['image_type']) {
@@ -316,6 +337,39 @@ class ajax extends AWS_CONTROLLER
 		H::ajax_json_output(AWS_APP::RSM(array(
 			'attachs' => $article_attach
 		), 1, null));
+	}
+
+	public function diary_attach_edit_list_action()
+	{
+	    if (! $diary_info = $this->model('diary')->get_diary_info_by_id($_POST['diary_id']))
+	    {
+	        H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('无法获取附件列表')));
+	    }
+	
+	    if ($diary_info['uid'] != $this->user_id AND !$this->user_info['permission']['is_administortar'] AND !$this->user_info['permission']['is_moderator'])
+	    {
+	        H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('你没有权限编辑这个附件列表')));
+	    }
+	
+	    if ($diary_attach = $this->model('publish')->get_attach('diary', $_POST['diary_id']))
+	    {
+	        foreach ($diary_attach as $attach_id => $val)
+	        {
+	            $diary_attach[$attach_id]['class_name'] = $this->model('publish')->get_file_class($val['file_name']);
+	
+	            $diary_attach[$attach_id]['delete_link'] = get_js_url('/publish/ajax/remove_attach/attach_id-' . base64_encode(H::encode_hash(array(
+	                'attach_id' => $attach_id,
+	                'access_key' => $val['access_key']
+	            ))));
+	
+	            $diary_attach[$attach_id]['attach_id'] = $attach_id;
+	            $diary_attach[$attach_id]['attach_tag'] = 'attach';
+	        }
+	    }
+	
+	    H::ajax_json_output(AWS_APP::RSM(array(
+	    'attachs' => $diary_attach
+	    ), 1, null));
 	}
 	
 	public function question_attach_edit_list_action()

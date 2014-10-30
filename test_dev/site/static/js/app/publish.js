@@ -8,6 +8,14 @@ $(document).ready(function () {
 	{
 		ITEM_ID = $('#article_id').val();
 	}
+	else if ($('#diary_id').length)
+	{
+		ITEM_ID = $('#diary_id').val();
+        $('input.date_picker').datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+	}
 
     if (ATTACH_ACCESS_KEY != '')
     {

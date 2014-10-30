@@ -218,6 +218,12 @@ class search_fulltext_class extends AWS_MODEL
 					'title_fulltext' => $search_code
 				), 'id = ' . intval($item_id));
 			break;
+			
+			case 'diary':
+				return $this->update('zxj_diary', array(
+					'title_fulltext' => $search_code
+				), 'id = ' . intval($item_id));
+			break;
 		}
 	}
 }

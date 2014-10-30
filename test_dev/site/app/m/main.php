@@ -57,7 +57,7 @@ class main extends AWS_CONTROLLER
 				break;
 
 				case 'topic':
-					HTTP::redirect('/topic/' . $_GET['id']);
+				    HTTP::redirect('/topic/' . $_GET['id']);
 				break;
 
 				case 'people':
@@ -69,8 +69,16 @@ class main extends AWS_CONTROLLER
 				break;
 
 				case 'article_square':
-					HTTP::redirect('/article/square/');
-				break;
+				    HTTP::redirect('/article/square/');
+				    break;
+				
+				case 'diary':
+				    HTTP::redirect('/diary/' . $_GET['id']);
+				    break;
+
+			    case 'diary_square':
+			        HTTP::redirect('/diary/square');
+			        break;
 
 				case 'topic_square':
 					HTTP::redirect('/topic/');
@@ -107,8 +115,10 @@ class main extends AWS_CONTROLLER
 			case 'people':
 			case 'article':
 			case 'article_square':
+			case 'diary':
+			case 'diary_square':
 			case 'topic_square':
-				// Public page..
+			// Public page..
 			break;
 		}
 
@@ -787,16 +797,16 @@ class main extends AWS_CONTROLLER
 
 	public function topic_action()
 	{
-		if (is_numeric($_GET['id']))
+	    if (is_numeric($_GET['id']))
 		{
-			if (!$topic_info = $this->model('topic')->get_topic_by_id($_GET['id']))
+		    if (!$topic_info = $this->model('topic')->get_topic_by_id($_GET['id']))
 			{
-				$topic_info = $this->model('topic')->get_topic_by_title($_GET['id']);
+			    $topic_info = $this->model('topic')->get_topic_by_title($_GET['id']);
 			}
 		}
 		else if (!$topic_info = $this->model('topic')->get_topic_by_title($_GET['id']))
 		{
-			$topic_info = $this->model('topic')->get_topic_by_url_token($_GET['id']);
+		    $topic_info = $this->model('topic')->get_topic_by_url_token($_GET['id']);
 		}
 
 		if (!$topic_info)
@@ -1050,6 +1060,75 @@ class main extends AWS_CONTROLLER
 		TPL::output('m/article_square');
 	}
 
+	public function diary_action()
+	{
+	    if ($_GET['notification_id'])
+	    {
+	        $this->model('notify')->read_notification($_GET['notification_id'], $this->user_id);
+	    }
+	
+	    if (! $diary_info = $this->model('diary')->get_diary_info_by_id($_GET['id']))
+	    {
+	        H::redirect_msg(AWS_APP::lang()->_t('日记不存在或已被删除'), '/home/explore/');
+	    }
+	
+	    $this->crumb($diary_info['title'], '/diary/' . $diary_info['id']);
+	
+	    if ($diary_info['has_attach'])
+	    {
+	        $diary_info['attachs'] = $this->model('publish')->get_attach('diary', $diary_info['id'], 'min');
+	
+	        $diary_info['attachs_ids'] = FORMAT::parse_attachs($diary_info['message'], true);
+	    }
+	
+	    $diary_info['user_info'] = $this->model('account')->get_user_info_by_uid($diary_info['uid'], true);
+	
+	    $diary_info['message'] = FORMAT::parse_attachs(nl2br(FORMAT::parse_markdown($diary_info['message'])));
+	
+	    if ($this->user_id)
+	    {
+	        $diary_info['vote_info'] = $this->model('diary')->get_diary_vote_by_id('diary', $diary_info['id'], null, $this->user_id);
+	    }
+	
+	    $diary_info['vote_users'] = $this->model('diary')->get_diary_vote_users_by_id('diary', $diary_info['id'], null, 10);
+	
+	    TPL::assign('diary_info', $diary_info);
+	
+	    TPL::assign('diary_topics', $this->model('topic')->get_topics_by_item_id($diary_info['id'], 'diary'));
+	
+	    if ($_GET['item_id'])
+	    {
+	        $comments[] = $this->model('diary')->get_comment_by_id($_GET['item_id']);
+	    }
+	    else
+	    {
+	        $comments = $this->model('diary')->get_comments($diary_info['id'], $_GET['page'], 100);
+	    }
+	
+	    if ($comments AND $this->user_id)
+	    {
+	        foreach ($comments AS $key => $val)
+	        {
+	            $comments[$key]['vote_info'] = $this->model('diary')->get_diary_vote_by_id('comment', $val['id'], 1, $this->user_id);
+	        }
+	    }
+	
+	    $this->model('diary')->update_views($diary_info['id']);
+	
+	    TPL::assign('comments', $comments);
+	    TPL::assign('comments_count', $diary_info['comments']);
+	
+	    TPL::assign('human_valid', human_valid('answer_valid_hour'));
+	
+	    TPL::assign('pagination', AWS_APP::pagination()->initialize(array(
+	    'base_url' => get_js_url('/m/diary/id-' . $diary_info['id']),
+	    'total_rows' => $diary_info['comments'],
+	    'per_page' => 100
+	    ))->create_links());
+	
+	    TPL::output('m/diary');
+	}
+	
 	public function nearby_people_action()
 	{
 		$this->crumb(AWS_APP::lang()->_t('附近的人'), '/m/nearby_people/');

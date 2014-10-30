@@ -574,6 +574,18 @@ class ajax extends AWS_CONTROLLER
 					H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('你没有权限进行此操作')));
 				}
 			break;
+			
+			case 'diary':
+				if (!$diary_info = $this->model('diary')->get_diary_info_by_id($_POST['item_id']))
+				{
+					H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('指定项目不存在')));
+				}
+				
+				if (!$this->user_info['permission']['edit_question_topic'] AND $this->user_id != $diary_info['uid'])
+				{
+					H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('你没有权限进行此操作')));
+				}
+			break;
 		}
 		
 		if (!($this->user_info['permission']['is_administortar'] OR $this->user_info['permission']['is_moderator']))
@@ -616,6 +628,13 @@ class ajax extends AWS_CONTROLLER
 				if ($article_info['lock'] AND ! ($this->user_info['permission']['is_administortar'] or $this->user_info['permission']['is_moderator']))
 				{
 					H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('锁定文章不能添加话题')));
+				}
+			break;
+			
+			case 'diary':
+				if ($diary_info['lock'] AND ! ($this->user_info['permission']['is_administortar'] or $this->user_info['permission']['is_moderator']))
+				{
+					H::ajax_json_output(AWS_APP::RSM(null, '-1', AWS_APP::lang()->_t('锁定日记不能添加手术类型')));
 				}
 			break;
 		}

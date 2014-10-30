@@ -1139,6 +1139,32 @@ function init_article_comment_box(selector)
     });
 }
 
+function init_diary_comment_box(selector)
+{
+    $(document).on('click', selector, function ()
+    {
+        if ($(this).parents('.aw-item-content').find('.aw-diary-comment-box').length)
+        {
+            if ($(this).parents('.aw-item-content').find('.aw-diary-comment-box').css('display') == 'block')
+            {
+               $(this).parents('.aw-item-content').find('.aw-diary-comment-box').fadeOut();
+            }
+            else
+            {
+                $(this).parents('.aw-item-content').find('.aw-diary-comment-box').fadeIn();
+            }
+        }
+        else
+        {
+            $(this).parents('.aw-item-content').append(Hogan.compile(AW_TEMPLATE.diaryCommentBox).render(
+            {
+                'at_uid' : $(this).attr('data-id'),
+                'diary_id' : $('.aw-mod-diary-replay-box input[name="diary_id"]').val()
+            }));
+        }
+    });
+}
+
 function insertVoteBar(data)
 {
     // {element:this,agree_count:20,flag:0,user_name:G_USER_NAME,answer_id:1230};
@@ -1301,7 +1327,11 @@ function init_topic_edit_box(selector) //selector -> .aw-edit-topic
         /*判断插入编辑box*/
         if (_aw_topic_editor_element.find('.aw-edit-topic-box').length == 0)
         {
-            _aw_topic_editor_element.append(AW_TEMPLATE.editTopicBox);
+        	if(PUBLISH_TYPE == 'diary'){
+        		_aw_topic_editor_element.append(AW_TEMPLATE.editSurgeryTypeBox);
+        	} else {
+        		_aw_topic_editor_element.append(AW_TEMPLATE.editTopicBox);
+        	}
 
             //给编辑box取消按钮添加事件
             _aw_topic_editor_element.find('.close-edit').click(function ()
@@ -1355,6 +1385,21 @@ function init_topic_edit_box(selector) //selector -> .aw-edit-topic
                         }, 'json');
                         break;
 
+                    case 'diary':
+                        $.post(G_BASE_URL + '/topic/ajax/save_topic_relation/', 'type=diary&item_id=' + data_id + '&topic_title=' + encodeURIComponent(_aw_topic_editor_element.find('#aw_edit_topic_title').val()), function (result)
+                        {
+                            if (result.errno != 1)
+                            {
+                                $.alert(result.err);
+
+                                return false;
+                            }
+
+                            _aw_topic_editor_element.prepend('<a href="' + G_BASE_URL + '/topic/' + result.rsm.topic_id + '" class="aw-topic-name" data-id="' + result.rsm.topic_id + '"><span>' + _aw_topic_editor_element.find('#aw_edit_topic_title').val() + '<button class="close aw-close">×</button></span></a>').hide().fadeIn();
+
+                            _aw_topic_editor_element.find('#aw_edit_topic_title').val('');
+                        }, 'json');
+                        break;
 
                     case 'topic':
                         $.post(G_BASE_URL + '/topic/ajax/save_related_topic/topic_id-' + data_id, 'topic_title=' + encodeURIComponent(_aw_topic_editor_element.find('#aw_edit_topic_title').val()), function (result)
@@ -1394,6 +1439,13 @@ function init_topic_edit_box(selector) //selector -> .aw-edit-topic
 
         bind_dropdown_list($(this).parents('.aw-topic-editor').find('#aw_edit_topic_title'),'topic');
         $(this).parents('.aw-topic-editor').find('.aw-edit-topic-box').fadeIn();
+        
+        //日记中增加医生和医院下拉搜索菜单
+        if(PUBLISH_TYPE == 'diary')
+        {
+        	bind_dropdown_list($(this).parents('.aw-ul-surgery-input').find('#doctor_name'), 'doctor');
+        	bind_dropdown_list($(this).parents('.aw-ul-surgery-input').find('#hospital_name'), 'hospital');
+        }
 
         // 是否允许创建新话题
         if (!G_CAN_CREATE_TOPIC)
@@ -1838,6 +1890,14 @@ function get_dropdown_list(selector, type, data)
         case 'topic' :
             url = G_BASE_URL + '/search/ajax/search/?type=topics&q=' + encodeURIComponent(data) + '&limit=10';
         break;
+
+        case 'doctor' :
+            url = G_BASE_URL + '/search/ajax/search/?type=doctors&q=' + encodeURIComponent(data) + '&limit=10';
+        break;
+
+        case 'hospital' :
+            url = G_BASE_URL + '/search/ajax/search/?type=hospitals&q=' + encodeURIComponent(data) + '&limit=10';
+        break;
     }
 
     dropdown_list_xhr = $.get(url, function(result)
@@ -1873,6 +1933,15 @@ function get_dropdown_list(selector, type, data)
 
 							case 'articles':
                                 $(selector).parent().find('.aw-dropdown-list').append(Hogan.compile(AW_TEMPLATE.searchDropdownListArticles).render(
+                                {
+                                    'url': a.url,
+                                    'content': a.name,
+                                    'comments': a.detail.comments
+                                }));
+                                break;
+
+							case 'diarys':
+                                $(selector).parent().find('.aw-dropdown-list').append(Hogan.compile(AW_TEMPLATE.searchDropdownListDiarys).render(
                                 {
                                     'url': a.url,
                                     'content': a.name,
@@ -1927,9 +1996,33 @@ function get_dropdown_list(selector, type, data)
                 case 'topic' :
                     $.each(result, function (i, a)
                     {
-                        $(selector).parent().find('.aw-dropdown-list').append(Hogan.compile(AW_TEMPLATE.editTopicDorpdownList).render(
+                        $(selector).parent().find('.aw-dropdown-list').append(Hogan.compile(AW_TEMPLATE.editTopicDropdownList).render(
                         {
                             'name': a['name']
+                        }));
+                    });
+                break;
+
+                case 'doctor' :
+                	$(selector).parents('#question_form').find('#doctor_id').val('');
+                    $.each(result, function (i, a)
+                    {
+                        $(selector).parent().find('.aw-dropdown-list').append(Hogan.compile(AW_TEMPLATE.editDoctorDropdownList).render(
+                        {
+                            'name': a['name'],
+                            'search_id': a['search_id']
+                        }));
+                    });
+                break;
+
+                case 'hospital' :
+                	$(selector).parents('#question_form').find('#hospital_id').val('');
+                    $.each(result, function (i, a)
+                    {
+                        $(selector).parent().find('.aw-dropdown-list').append(Hogan.compile(AW_TEMPLATE.editHospitalDropdownList).render(
+                        {
+                            'name': a['name'],
+                        	'search_id': a['search_id']
                         }));
                     });
                 break;
@@ -2190,6 +2283,49 @@ function article_vote(element, article_id, rating)
 	}, 'json');
 }
 
+function diary_vote(element, diary_id, rating)
+{
+	$.loading('show');
+
+	if ($(element).hasClass('active'))
+	{
+		rating = 0;
+	}
+
+	$.post(G_BASE_URL + '/diary/ajax/diary_vote/', 'type=diary&item_id=' + diary_id + '&rating=' + rating, function (result) {
+		$.loading('hide');
+
+		if (result.errno != 1)
+	    {
+	        $.alert(result.err);
+	    }
+	    else
+	    {
+			if (rating == 0)
+			{
+
+				$(element).removeClass('active');
+                $(element).find('b').html(parseInt($(element).find('b').html()) - 1);
+			}
+            else if (rating == -1)
+            {
+                if ($(element).parents('.aw-article-vote').find('.agree').hasClass('active'))
+                {
+                    $(element).parents('.aw-article-vote').find('b').html(parseInt($(element).parents('.aw-article-vote').find('b').html()) - 1);
+                    $(element).parents('.aw-article-vote').find('a').removeClass('active');
+                }
+                $(element).addClass('active');
+            }
+			else
+			{
+				$(element).parents('.aw-article-vote').find('a').removeClass('active');
+				$(element).addClass('active');
+                $(element).find('b').html(parseInt($(element).find('b').html()) + 1);
+			}
+	    }
+	}, 'json');
+}
+
 function comment_vote(element, comment_id, rating)
 {
 	$.loading('show');
@@ -2200,6 +2336,38 @@ function comment_vote(element, comment_id, rating)
 	}
 
 	$.post(G_BASE_URL + '/article/ajax/article_vote/', 'type=comment&item_id=' + comment_id + '&rating=' + rating, function (result) {
+		$.loading('hide');
+
+		if (result.errno != 1)
+	    {
+	        $.alert(result.err);
+	    }
+	    else
+	    {
+			if (rating == 0)
+			{
+				$(element).removeClass('active');
+				$(element).html($(element).html().replace(_t('我已赞'), _t('赞')));
+			}
+			else
+			{
+				$(element).addClass('active');
+				$(element).html($(element).html().replace(_t('赞'), _t('我已赞')));
+			}
+	    }
+	}, 'json');
+}
+
+function diary_comment_vote(element, comment_id, rating)
+{
+	$.loading('show');
+
+	if ($(element).hasClass('active'))
+	{
+		rating = 0;
+	}
+
+	$.post(G_BASE_URL + '/diary/ajax/diary_vote/', 'type=comment&item_id=' + comment_id + '&rating=' + rating, function (result) {
 		$.loading('hide');
 
 		if (result.errno != 1)

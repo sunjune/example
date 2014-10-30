@@ -7,6 +7,8 @@
 	<div class="aw-question-content">		
 		<?php if ($val['question_id']) { ?>
 			<h2><a href="m/question/<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a></h2>
+		<?php } elseif ($val['post_type'] == 'diary') { ?>
+			<h2><a href="m/diary/<?php echo $val['id']; ?>"><?php echo $val['title']; ?></a></h2>
 		<?php } else { ?>
 			<h2><a href="m/article/<?php echo $val['id']; ?>"><?php echo $val['title']; ?></a></h2>
 		<?php } ?>

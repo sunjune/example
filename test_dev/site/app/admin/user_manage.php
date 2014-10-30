@@ -322,6 +322,8 @@ class user_manage extends AWS_ADMIN_CONTROLLER
 			'function_interval',
 			'publish_article',
 			'edit_article',
+			'publish_diary',
+			'edit_diary',
 			'edit_question_topic',
 			'publish_comment'
 		);

@@ -1072,11 +1072,11 @@ class topic_class extends AWS_MODEL
 	
 	public function get_topic_best_answer_action_list($topic_ids, $uid, $limit)
 	{
-		$cache_key = 'topic_best_answer_action_list_' . md5($topic_ids . $limit);
+	    $cache_key = 'topic_best_answer_action_list_' . md5($topic_ids . $limit);
 
 		if (!$result = AWS_APP::cache()->get($cache_key))
 		{
-			if ($topic_relation = $this->query_all("SELECT item_id FROM " . $this->get_table('topic_relation') . " WHERE topic_id IN (" . implode(',', explode(',', $topic_ids)) . ") AND `type` = 'question'"))
+		    if ($topic_relation = $this->query_all("SELECT item_id FROM " . $this->get_table('topic_relation') . " WHERE topic_id IN (" . implode(',', explode(',', $topic_ids)) . ") AND `type` = 'question'"))
 			{
 				foreach ($topic_relation AS $key => $val)
 				{

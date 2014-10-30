@@ -66,6 +66,30 @@ class search_class extends AWS_MODEL
 		
 		return $result;
 	}
+
+	public function search_doctors($q, $page, $limit = 20)
+	{
+	    if (is_array($q))
+	    {
+	        $q = implode('', $q);
+	    }
+	
+        $result = $this->fetch_all('zxj_doctor', "doctor_name_cn LIKE '" . $this->quote($q) . "%'", null, calc_page_limit($page, $limit));
+
+	    return $result;
+	}
+
+	public function search_hospitals($q, $page, $limit = 20)
+	{
+	    if (is_array($q))
+	    {
+	        $q = implode('', $q);
+	    }
+	
+	    $result = $this->fetch_all('zxj_hospital', "hospital_name_cn LIKE '" . $this->quote($q) . "%'", null, calc_page_limit($page, $limit));
+	
+	    return $result;
+	}
 	
 	public function search_questions($q, $topic_ids = null, $page = 1, $limit = 20)
 	{	
@@ -107,7 +131,15 @@ class search_class extends AWS_MODEL
 			case 'topics' :
 				$result_list = $this->search_topics($q, $page, $limit);
 				break;
-			
+
+			case 'doctors' :
+			    $result_list = $this->search_doctors($q, $page, $limit);
+			    break;
+
+		    case 'hospitals' :
+		        $result_list = $this->search_hospitals($q, $page, $limit);
+		        break;
+			         
 			case 'questions' :
 				$result_list = $this->search_questions($q, $topic_ids, $page, $limit);
 				break;
@@ -121,8 +153,8 @@ class search_class extends AWS_MODEL
 		{
 			foreach ($result_list as $result_info)
 			{
-				$result = $this->prase_result_info($result_info);
-			
+			    $result = $this->prase_result_info($result_info);
+
 				if (is_array($result))
 				{
 					$data[] = $result;
@@ -171,6 +203,43 @@ class search_class extends AWS_MODEL
 				'focus_count' => $result_info['focus_count'],
 				'discuss_count' => $result_info['discuss_count'],	// 讨论数量
 				'topic_description' => $result_info['topic_description']
+			);
+		}
+		else if ($result_info['doctor_id'])
+		{
+			$result_type = 'doctors';
+
+			$result_info['uid'] = '';
+			$result_info['score'] = '';
+
+			$search_id = $result_info['doctor_id'];
+
+			$url = get_js_url('/doctor/' . $result_info['doctor_id']);
+
+			$name = $result_info['doctor_name_cn'];
+
+			$detail = array(
+				'doctor_pic'=> get_topic_pic_url('mid', $result_info['doctor_pic']),	
+				'doctor_id' => $result_info['doctor_id'],
+				'hospital_id' => $result_info['hospital_id']
+			);
+		}
+		else if ($result_info['hospital_id'])
+		{
+			$result_type = 'hospitals';
+
+			$result_info['uid'] = '';
+			$result_info['score'] = '';
+
+			$search_id = $result_info['hospital_id'];
+
+			$url = get_js_url('/hospital/' . $result_info['hospital_id']);
+
+			$name = $result_info['hospital_name_cn'];
+
+			$detail = array(
+				'hospital_pic'=> get_topic_pic_url('mid', $result_info['hospital_pic']),	
+				'hospital_id' => $result_info['hospital_id']
 			);
 		}
 		else if ($result_info['question_id'])

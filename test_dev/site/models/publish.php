@@ -365,6 +365,11 @@ class publish_class extends AWS_MODEL
 				case 'article':
 					$update_key = 'id';
 				break;
+				
+				case 'diary':
+				    $item_type = 'zxj_diary';
+					$update_key = 'id';
+				break;
 			}
 			
 			return $this->shutdown_update($item_type, array(
@@ -408,6 +413,11 @@ class publish_class extends AWS_MODEL
 				break;
 				
 				case 'article':
+					$update_key = 'id';
+				break;
+				
+				case 'diary':
+				    $attach['item_type'] = 'zxj_diary';
 					$update_key = 'id';
 				break;
 			}

@@ -150,7 +150,7 @@ class main extends AWS_CONTROLLER
 			'total_rows' => $this->model('posts')->get_posts_list_total(),
 			'per_page' => get_setting('contents_per_page')
 		))->create_links());
-		
+
 		TPL::assign('posts_list', $posts_list);
 		TPL::assign('posts_list_bit', TPL::output('explore/ajax/list', false));
 		

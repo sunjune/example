@@ -103,11 +103,11 @@ class ajax extends AWS_CONTROLLER
 	{
 		if ($result = $this->model('search')->search($_GET['q'], $_GET['type'], 1, $_GET['limit'], $_GET['topic_ids']))
 		{
-			H::ajax_json_output($result);
+		    H::ajax_json_output($result);
 		}
 		else
 		{
-			H::ajax_json_output(array());	
+		    H::ajax_json_output(array());	
 		}
 	}
 }

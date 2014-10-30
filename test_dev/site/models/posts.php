@@ -33,6 +33,10 @@ class posts_class extends AWS_MODEL
 				case 'article':
 					$result = $this->fetch_row('article', 'id = ' . intval($post_id));
 				break;
+				
+				case 'diary':
+					$result = $this->fetch_row('zxj_diary', 'id = ' . intval($post_id));
+				break;
 			}
 			
 			if (!$result)
@@ -64,6 +68,21 @@ class posts_class extends AWS_MODEL
 			break;
 			
 			case 'article':
+				$data = array(
+					'add_time' => $result['add_time'],
+					'update_time' => $result['add_time'],
+					'category_id' => $result['category_id'],
+					'view_count' => $result['views'],
+					'anonymous' => 0,
+					'uid' => $result['uid'],
+					'agree_count' => $result['votes'],
+					'answer_count' => $result['comments'],
+					'lock' => $result['lock'],
+					'is_recommend' => $result['is_recommend'],
+				);
+			break;
+			
+			case 'diary':
 				$data = array(
 					'add_time' => $result['add_time'],
 					'update_time' => $result['add_time'],
@@ -110,7 +129,7 @@ class posts_class extends AWS_MODEL
 	
 	public function get_posts_list($post_type, $page = 1, $per_page = 10, $sort = null, $topic_ids = null, $category_id = null, $answer_count = null, $day = 30, $is_recommend = false)
 	{
-		if ($sort == 'unresponsive')
+	    if ($sort == 'unresponsive')
 		{
 			$answer_count = 0;
 		}
@@ -138,7 +157,7 @@ class posts_class extends AWS_MODEL
 		}
 		
 		if ($topic_ids)
-		{			
+		{
 			$posts_index = $this->get_posts_list_by_topic_ids($post_type, $post_type, $topic_ids, $category_id, $answer_count, $order_key, $is_recommend, $page, $per_page);
 		}
 		else
@@ -271,6 +290,10 @@ class posts_class extends AWS_MODEL
 				case 'article':
 					$article_ids[] = $data['post_id'];
 				break;
+				
+				case 'diary':
+					$diary_ids[] = $data['post_id'];
+				break;
 			}
 			
 			$data_list_uids[$data['uid']] = $data['uid'];
@@ -297,6 +320,13 @@ class posts_class extends AWS_MODEL
 			
 			$article_infos = $this->model('article')->get_article_info_by_ids($article_ids);
 		}
+
+		if ($diary_ids)
+		{
+			$topic_infos['diary'] = $this->model('topic')->get_topics_by_item_ids($diary_ids, 'diary');
+				
+			$diary_infos = $this->model('diary')->get_diary_info_by_ids($diary_ids);
+		}
 		
 		$users_info = $this->model('account')->get_user_info_by_uids($data_list_uids);
 
@@ -316,6 +346,10 @@ class posts_class extends AWS_MODEL
 				
 				case 'article':
 					$explore_list_data[$key] = $article_infos[$data['post_id']];
+				break;
+				
+				case 'diary':
+					$explore_list_data[$key] = $diary_infos[$data['post_id']];
 				break;
 			}
 			
@@ -354,7 +388,7 @@ class posts_class extends AWS_MODEL
 		{
 			$topic_relation_where[] = "`type` = '" . $this->quote($topic_type) . "'";
 		}
-		
+
 		if ($topic_relation_query = $this->query_all("SELECT `item_id`, `type` FROM " . get_table('topic_relation') . " WHERE " . implode(' AND ', $topic_relation_where)))
 		{
 			foreach ($topic_relation_query AS $key => $val)
@@ -396,7 +430,6 @@ class posts_class extends AWS_MODEL
 		if (!$result = AWS_APP::cache()->get($result_cache_key))
 		{
 			$result = $this->fetch_page('posts_index', implode(' OR ', $where), $order_by, $page, $per_page);
-			
 			AWS_APP::cache()->set($result_cache_key, $result, get_setting('cache_level_high'));
 		}
 		

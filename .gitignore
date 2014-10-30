@@ -1,0 +1,8 @@
+nbproject
+uploads
+tmp
+cache
+.DS_Store
+*.prefs
+*.project
+test_dev/site/system/config/database.php

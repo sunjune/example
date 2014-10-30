@@ -27,6 +27,8 @@ class notify_class extends AWS_MODEL
 	const CATEGORY_CONTEXT	= 7;	// 文字
 	
 	const CATEGORY_ARTICLE	= 8;	// 文章
+
+	const CATEGORY_DIARY	= 9;	// 日记
 	
 
 	//=========操作标示:action_type==================================================
@@ -51,6 +53,9 @@ class notify_class extends AWS_MODEL
 	
 	const TYPE_ARTICLE_NEW_COMMENT	= 117; // 文章有新评论
 	const TYPE_ARTICLE_COMMENT_AT_ME	= 118; // 文章评论提到我
+
+	const TYPE_DIARY_NEW_COMMENT	= 151; // 日记有新评论
+	const TYPE_DIARY_COMMENT_AT_ME	= 152; // 日记评论提到我
 	
 	public $notify_actions = array();
 	public $notify_action_details;
@@ -130,7 +135,7 @@ class notify_class extends AWS_MODEL
 			
 			foreach ($unread_notifys as $key => $val)
 			{
-				if ($val['model_type'] == self::CATEGORY_QUESTION OR $val['model_type'] == self::CATEGORY_ARTICLE)
+				if ($val['model_type'] == self::CATEGORY_QUESTION OR $val['model_type'] == self::CATEGORY_ARTICLE OR $val['model_type'] == self::CATEGORY_DIARY)
 				{
 					if (isset($unique_people[$val['source_id']][$val['action_type']][$val['data']['from_uid']]))
 					{
@@ -166,7 +171,12 @@ class notify_class extends AWS_MODEL
 			{				
 				$article_ids[] = $val['data']['article_id'];
 			}
-			
+
+			if ($val['data']['diary_id'])
+			{
+				$diary_ids[] = $val['data']['diary_id'];
+			}
+				
 			if ($val['data']['from_uid'])
 			{
 				$uids[] = intval($val['data']['from_uid']);
@@ -187,6 +197,11 @@ class notify_class extends AWS_MODEL
 		if ($article_ids)
 		{
 			$article_list = $this->model('article')->get_article_info_by_ids($article_ids);
+		}
+
+		if ($diary_ids)
+		{
+			$diary_list = $this->model('diary')->get_diary_info_by_ids($diary_ids);
 		}
 		
 		if ($uids)
@@ -255,6 +270,39 @@ class notify_class extends AWS_MODEL
 						$tmp_data['key_url'] = get_js_url('/article/' . $data['article_id'] . '?' . $token . '&item_id=' . $data['item_id']);
 					}
 				break;
+
+				case self::CATEGORY_DIARY :
+					$tmp_data['title'] = $diary_list[$data['diary_id']]['title'];
+						
+					if ($notify['extends'])
+					{
+						$tmp_data['extend_count'] = count($notify['extends']);
+				
+						foreach ($notify['extends'] as $ex_key => $ex_notify)
+						{
+							$from_uid = $ex_notify['data']['from_uid'];
+								
+							if ($ex_notify['data']['item_id'])
+							{
+								$item_ids[] = $ex_notify['data']['item_id'];
+							}
+						}
+				
+						if ($item_ids)
+						{
+							asort($item_ids);
+								
+							$querys[] = 'item_id=' . implode(',', array_unique($item_ids));
+						}
+				
+						$tmp_data['extend_details'] = $this->format_extend_detail($notify['extend_details'], $user_infos);
+						$tmp_data['key_url'] = get_js_url('/diary/' . $data['diary_id'] . '?' . $token);
+					}
+					else
+					{
+						$tmp_data['key_url'] = get_js_url('/diary/' . $data['diary_id'] . '?' . $token . '&item_id=' . $data['item_id']);
+					}
+					break;
 				
 				case self::CATEGORY_QUESTION :
 					switch ($notify['action_type'])
@@ -781,6 +829,10 @@ class notify_class extends AWS_MODEL
 				{
 					$data[$key]['message'] = $val['extend_count'] . ' ' . AWS_APP::lang()->_t('项关于文章') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a>';
 				}
+				else if ($val['model_type'] == self::CATEGORY_DIARY)
+				{
+					$data[$key]['message'] = $val['extend_count'] . ' ' . AWS_APP::lang()->_t('项关于日记') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a>';
+				}
 			}
 			else
 			{
@@ -805,6 +857,10 @@ class notify_class extends AWS_MODEL
 				{
 					$data[$key]['message'] = '<a href="' . $val['p_url'] . '">' . $val['p_user_name'] . '</a> ' . AWS_APP::lang()->_t('评论了文章') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a>';
 				}
+				else if ($val['action_type'] == self::TYPE_DIARY_NEW_COMMENT)
+				{
+					$data[$key]['message'] = '<a href="' . $val['p_url'] . '">' . $val['p_user_name'] . '</a> ' . AWS_APP::lang()->_t('评论了日记') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a>';
+				}
 				else if ($val['action_type'] == self::TYPE_COMMENT_AT_ME)
 				{
 					$data[$key]['message'] = '<a href="' . $val['p_url'] . '">' . $val['p_user_name'] . '</a> ' . AWS_APP::lang()->_t('在问题') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a> ' . AWS_APP::lang()->_t('中的评论提到了你');
@@ -816,6 +872,10 @@ class notify_class extends AWS_MODEL
 				else if ($val['action_type'] == self::TYPE_ARTICLE_COMMENT_AT_ME)
 				{
 					$data[$key]['message'] = '<a href="' . $val['p_url'] . '">' . $val['p_user_name'] . '</a> ' . AWS_APP::lang()->_t('在文章') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a> ' . AWS_APP::lang()->_t('评论中回复了你');
+				}
+				else if ($val['action_type'] == self::TYPE_DIARY_COMMENT_AT_ME)
+				{
+					$data[$key]['message'] = '<a href="' . $val['p_url'] . '">' . $val['p_user_name'] . '</a> ' . AWS_APP::lang()->_t('在日记') . ' <a href="' . $val['key_url'] . '">' . $val['title'] . '</a> ' . AWS_APP::lang()->_t('评论中回复了你');
 				}
 				else if ($val['action_type'] == self::TYPE_ANSWER_AT_ME)
 				{
@@ -904,7 +964,15 @@ class notify_class extends AWS_MODEL
 					{
 						$data[$key]['extend_message'][] = AWS_APP::lang()->_t('他们在文章中的评论回复了你') . ': ' . $users_list;
 					}
+					else if ($action_type == self::TYPE_DIARY_COMMENT_AT_ME)
+					{
+						$data[$key]['extend_message'][] = AWS_APP::lang()->_t('他们在日记中的评论回复了你') . ': ' . $users_list;
+					}
 					else if ($action_type == self::TYPE_ARTICLE_NEW_COMMENT)
+					{
+						$data[$key]['extend_message'][] = AWS_APP::lang()->_t('%s 个新回复, 按评论人查看', $extend['count']) . ': ' . $users_list;
+					}
+					else if ($action_type == self::TYPE_DIARY_NEW_COMMENT)
 					{
 						$data[$key]['extend_message'][] = AWS_APP::lang()->_t('%s 个新回复, 按评论人查看', $extend['count']) . ': ' . $users_list;
 					}

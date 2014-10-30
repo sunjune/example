@@ -33,10 +33,13 @@ textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type=
 .aw-reset-nav-tabs > li > a:active{color: #000;background: #fff;}
 .aw-reset-nav-tabs > li.active > a{background: #fff; border-radius: 3px 3px 0 0;}
 .aw-reset-nav-tabs > li.active > a:hover{background: #fff;}
+
 .aw-logo { width: 120px; }
 .aw-logo a { width: 120px; }
+
 .aw-search-box { width: 220px; }
 .navbar-collapse { padding-left: 0; }
+
 /*
 **	重载bootstrap按钮
 */
@@ -154,16 +157,55 @@ background-color: #b0d60a;background-image: -moz-linear-gradient(top, #b5da11, #
 .aw-topic-name span {display: inline-block;padding: 0 6px;color: #fff; background:#a9d014;}
 .aw-topic-name span:hover{color: #fff; background:#b0d60a;text-decoration:none;}
 
+.aw-publish-tabs { margin: 10px 20px 0; }
 
+.btn-primary { color: #fff; background-color: #a9d014; border-color: #a9d014; }
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary { color: #fff; background-color: #b0d60a; border-color: #b0d60a; }
+
+.aw-mod-surgeryinfo{width:100%; height:80px; display:block;}
+.aw-mod-surgeryinfo h3 {margin-top:5px;}
 /*
 **	话题详情页
 */
 
+/*
+**	文章详情页
+*/
+.aw-article-detail-title .aw-article-surgery-info ul { width: 100%; height:1.2em; }
+.aw-article-detail-title .aw-article-surgery-info ul li { display:block; float: left; margin-left:10px; }
 
 /*
-** 发起页面
+**  日记详情页
 */
+.aw-mod-diary-replay-box{position:relative;margin-top:20px;padding-left: 40px;}
+.aw-mod-diary-replay-box .aw-mod-head{position:absolute;left:0;}
+.aw-mod-diary-replay-box .aw-mod-head img{width: 32px;height: 32px;}
+.aw-mod-diary-replay-box .aw-mod-body, .aw-diary-comment-box .aw-mod-body{margin-bottom:10px;}
+.aw-mod-diary-replay-box .aw-mod-footer input{width: 80px;}
 
+.aw-diary-detail .aw-item{position: relative;padding-left: 40px !important;}
+.aw-diary-detail .aw-item .aw-user-name { position: absolute; left: 0; top: 10px; }
+.aw-diary-detail .aw-item .aw-user-name img{width: 32px;height: 32px;}
+.aw-diary-detail .aw-item .aw-item-meta { margin-top: 10px; font-size: 12px; color: #999; }
+.aw-diary-detail .aw-item .aw-item-meta a { margin-left: 15px; color: #999; }
+
+.aw-diary-surgery-info .aw-diary-surgery-info-label { color: #999; font-size: 0.8em; }
+
+/*
+** 日记发起页面
+*/
+.aw-mod-publish h3 {margin-top:10px;}
+.aw-ul-surgery-input { display: block; width: 100%; height: 80px; }
+.aw-ul-surgery-input .aw-li-surgery-info { float: left; margin-right: 20px; }
+.aw-ul-surgery-input .aw-li-surgery-info .surgery-type { width: 170px !important; }
+.aw-ul-surgery-input .aw-li-surgery-info .surgery-date { width: 120px !important; }
+.aw-ul-surgery-input .aw-li-surgery-info .surgery-cost { width: 100px !important; }
+.aw-ul-surgery-input .aw-li-surgery-info .surgery-doctor { width: 100px !important; }
+.aw-ul-surgery-input .aw-li-surgery-info .surgery-hospital { width: 200px !important; }
+
+.aw-main-content .aw-dynamic-index .aw-mod-body .aw-ul-surgery-input { height: 110px; }
+
+.aw-ul-surgery-input .aw-li-surgery-info .date_picker { padding-left: 30px !important; background: url('/static/css/default/img/calendar.png') no-repeat 7px 9px #fff; }
 
 
 /*

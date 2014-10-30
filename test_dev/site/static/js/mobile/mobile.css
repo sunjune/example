@@ -408,6 +408,9 @@ a.aw-load-more:hover{color: #58B530;}
 .aw-article-voter a img{width: 25px;height: 25px;margin-bottom:10px;border-radius: 15px;}
 .aw-article-voter a.more-voters{display: inline-block;width: 25px;height: 25px;line-height:18px;border-radius: 15px;background-color: #f1f2f3;text-align: center;vertical-align: middle;color: #cdcecf;}
 
+.aw-diary-surgery-info { color: #383; font-size: 0.9em; }
+.aw-diary-surgery-info .aw-diary-surgery-info-label { color: #999; }
+
 .btn-success {border-color: #58B530;background-color: #58B530;color: #fff;}
 .btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active,.open .dropdown-toggle.btn-success {color: #fff;background-color: #9cc813;border-color: #9cc813;}
 

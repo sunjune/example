@@ -8,6 +8,8 @@
 		<h4>
 			<?php if ($val['question_id']) { ?>
 			<a href="question/<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a>
+			<?php } elseif ($val['post_type'] == 'diary') { ?>
+			<a href="diary/<?php echo $val['id']; ?>"><?php echo $val['title']; ?></a>
 			<?php } else { ?>
 			<a href="article/<?php echo $val['id']; ?>"><?php echo $val['title']; ?></a>
 			<?php } ?>

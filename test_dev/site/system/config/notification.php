@@ -101,3 +101,15 @@ $config['action_details'][notify_class::TYPE_ARTICLE_COMMENT_AT_ME] = array(
 	'combine' => 1,
 	'desc' => '有文章评论提到我',
 );
+
+$config['action_details'][notify_class::TYPE_DIARY_NEW_COMMENT] = array(
+		'user_setting' => 1,
+		'combine' => 1,
+		'desc' => '我的日记被评论',
+);
+
+$config['action_details'][notify_class::TYPE_DIARY_COMMENT_AT_ME] = array(
+		'user_setting' => 1,
+		'combine' => 1,
+		'desc' => '有日记评论提到我',
+);

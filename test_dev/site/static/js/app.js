@@ -91,6 +91,9 @@ $(document).ready(function ()
     init_article_comment_box('.aw-article-detail .aw-article-comment');
     init_topic_edit_box('.aw-edit-topic');
 
+    //日记页添加评论, 话题添加 绑定事件
+    init_diary_comment_box('.aw-diary-detail .aw-diary-comment');
+    
     /*用户头像提示box*/
     show_card_box('.aw-user-name, .aw-user-img', 'user');
     show_card_box('.aw-topic-name, .aw-topic-img', 'topic');
@@ -162,7 +165,7 @@ $(document).ready(function ()
     //话题编辑下拉菜单mouseover click事件动态绑定
     $(document).on('mouseover', '.aw-edit-topic-box .aw-dropdown-list li', function ()
     {
-        $(this).parents('.aw-edit-topic-box').find('#aw_edit_topic_title').val($(this).text());
+       	$(this).parents('.aw-edit-topic-box').find('#aw_edit_topic_title').val($(this).text());
     });
 
     $(document).on('click', '.aw-edit-topic-box .aw-dropdown-list li', function ()
@@ -170,6 +173,32 @@ $(document).ready(function ()
         $(this).parents('.aw-edit-topic-box').find('#aw_edit_topic_title').val($(this).text());
         $(this).parents('.aw-edit-topic-box').find('.submit-edit').click();
         $(this).parents('.aw-edit-topic-box').find('.aw-dropdown').hide();
+    });
+
+    //医生姓名下拉菜单mouseover click事件动态绑定
+    $(document).on('mouseover', '.aw-edit-doctor-box .aw-dropdown-list li', function ()
+    {
+    	$(this).parents('.aw-edit-doctor-box').find('#doctor_name').val($(this).text());
+    });
+
+    $(document).on('click', '.aw-edit-doctor-box .aw-dropdown-list li', function ()
+    {
+        $(this).parents('.aw-edit-doctor-box').find('#doctor_name').val($(this).text());
+        $(this).parents('#question_form').find('#doctor_id').val($(this).attr('doctorid'));
+        $(this).parents('.aw-edit-doctor-box').find('.aw-dropdown').hide();
+    });
+
+    //医院名称下拉菜单mouseover click事件动态绑定
+    $(document).on('mouseover', '.aw-edit-hospital-box .aw-dropdown-list li', function ()
+    {
+    	$(this).parents('.aw-edit-hospital-box').find('#hospital_name').val($(this).text());
+    });
+
+    $(document).on('click', '.aw-edit-hospital-box .aw-dropdown-list li', function ()
+    {
+        $(this).parents('.aw-edit-hospital-box').find('#hospital_name').val($(this).text());
+        $(this).parents('#question_form').find('#hospital_id').val($(this).attr('hospitalid'));
+        $(this).parents('.aw-edit-hospital-box').find('.aw-dropdown').hide();
     });
 
     //分享私信用户下拉点击事件动态绑定
@@ -204,6 +233,12 @@ $(document).ready(function ()
 
             case 'article':
                 $.post(G_BASE_URL + '/topic/ajax/remove_topic_relation/', 'type=article&item_id=' + data_id + '&topic_id=' + $(this).parents('.aw-topic-name').attr('data-id'),function(){
+                    $('#aw-ajax-box').empty();
+                });
+                break;
+
+            case 'diary':
+                $.post(G_BASE_URL + '/topic/ajax/remove_topic_relation/', 'type=diary&item_id=' + data_id + '&topic_id=' + $(this).parents('.aw-topic-name').attr('data-id'),function(){
                     $('#aw-ajax-box').empty();
                 });
                 break;

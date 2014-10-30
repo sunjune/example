@@ -127,7 +127,7 @@ class article_class extends AWS_MODEL
 			
 			$this->update('article', array(
 				'comments' => $this->count('article_comments', 'article_id = ' . $comment_info['article_id'])
-			), 'id = ' . $comment_info['id']);
+			), 'id = ' . $comment_info['article_id']);  // 之前这里写的是['id']，这样就成了评论id，应该是个bug
 			
 			return true;
 		}

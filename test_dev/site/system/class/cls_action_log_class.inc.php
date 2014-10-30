@@ -21,7 +21,8 @@ class ACTION_LOG
 	const CATEGORY_COMMENT = 3;	// 评论
 
 	const CATEGORY_TOPIC = 4;	// 话题 
-	
+
+	const CATEGORY_DIARY = 5;	// 日记
 	
 	const ADD_QUESTION = 101;	// 添加问题
 	
@@ -67,6 +68,9 @@ class ACTION_LOG
 	
 	const ADD_AGREE_ARTICLE = 502;	// 赞同文章
 	
+	const ADD_DIARY = 551;	// 添加日记
+
+	const ADD_AGREE_DIARY = 552;	// 赞同日记
 	
 	public static function associate_fresh_action($history_id, $associate_id, $associate_type, $associate_action, $uid, $anonymous, $add_time)
 	{
@@ -77,7 +81,8 @@ class ACTION_LOG
 			self::ADD_AGREE,
 			self::ANSWER_QUESTION,
 			self::ADD_REQUESTION_FOCUS,
-			self::ADD_AGREE_ARTICLE
+			self::ADD_AGREE_ARTICLE,
+			self::ADD_AGREE_DIARY
 		)))
 		{
 			// 删除相同关联 ID 下相同动作的旧动态
@@ -442,7 +447,18 @@ class ACTION_LOG
 					$action_string = '<a href="' . $user_profile_url . '" ' . $user_link_attr . '>' . $user_name . '</a> ' . AWS_APP::lang()->_t('发表了文章');
 				}
 				break;
-				
+
+			case self::ADD_DIARY :
+				if ($associate_topic_info)
+				{
+					$action_string = '<a href="' . $user_profile_url . '" ' . $user_link_attr . '>' . $user_name . '</a> 在 <a href="' . $topic_url . '" ' . $topic_link_attr . '>' . $associate_topic_info['topic_title'] . '</a> ' . AWS_APP::lang()->_t('话题发表了日记');
+				}
+				else
+				{
+					$action_string = '<a href="' . $user_profile_url . '" ' . $user_link_attr . '>' . $user_name . '</a> ' . AWS_APP::lang()->_t('发表了日记');
+				}
+				break;				
+
 			case self::ADD_AGREE_ARTICLE :
 				if ($associate_topic_info)
 				{
@@ -451,6 +467,17 @@ class ACTION_LOG
 				else
 				{
 					$action_string = '<a href="' . $user_profile_url . '" ' . $user_link_attr . '>' . $user_name . '</a> ' . AWS_APP::lang()->_t('赞同了该文章');
+				}
+				break;
+
+			case self::ADD_AGREE_DIARY :
+				if ($associate_topic_info)
+				{
+					$action_string = '<a href="' . $user_profile_url . '" ' . $user_link_attr . '>' . $user_name . '</a> 在 <a href="' . $topic_url . '" ' . $topic_link_attr . '>' . $associate_topic_info['topic_title'] . '</a> ' . AWS_APP::lang()->_t('话题添加了一个日记赞同');
+				}
+				else
+				{
+					$action_string = '<a href="' . $user_profile_url . '" ' . $user_link_attr . '>' . $user_name . '</a> ' . AWS_APP::lang()->_t('赞同了该日记');
 				}
 				break;
 		}
