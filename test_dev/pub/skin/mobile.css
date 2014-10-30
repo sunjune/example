@@ -1,0 +1,27 @@
+/* @generated */
+.index-page{background:url("/zhengxingji/skin/imgs/mobile_download/bg.png")}
+.index-page .gheader-wp .gheader{margin-top:0;padding-top:10px}
+
+.board-web{margin:66px auto 0;/*width:915px;*/position:relative}
+.arrow{width:0;height:0;font-size:0;border-width:20px;border-style:solid dashed dashed;border-color:#FFF transparent transparent;position:absolute}
+.board-web{height:540px;margin-top:48px}
+.board-web .arrow{top:-50px;left:738px;*left:785px}
+
+.board-web pre{/*position:absolute;width:371px;height:77px;top:48px;left:516px;*/font-size:1.15em;text-align: right; color: #4c4c4c; margin-right: 15%;}
+pre:hover {color:#000  ; text-shadow: 4px 4px 4px #ccc;  }
+
+.board-web .note{position:absolute;width:371px;height:77px;top:148px;left:516px;font-size:40px;text-align: right; color: #FFA01F}
+
+.board-web div{float:left; text-align: center;width:50%;}
+.board-web .mobile_star img{max-width: 90%;}
+.board-web .qr_code{margin: 5% auto;}
+.weixin-down{/*width:120px;height:120px;position:absolute;top:329px;left:516px;*/font-size:14px;line-height:1.75em}
+.weibo-down{/*width:120px;height:120px;position:absolute;top:329px;left:516px;*/font-size:14px;line-height:1.75em}
+.weibo-down{/*left:767px*/}
+.weixin-code{/*display:block;*/width:50%;/*height:97px*/}
+.weibo-code{/*display:block;*/width:50%;/*height:97px*/}
+.gbottom{background-color:transparent}
+
+@media (max-width: 480px) {
+	.board-web div{width:100%;}
+}
