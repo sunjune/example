@@ -6,3 +6,4 @@ cache
 *.prefs
 *.project
 test_dev/site/system/config/database.php
+test_dev/site/system/config/database.php
