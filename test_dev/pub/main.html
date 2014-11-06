@@ -1,0 +1,936 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>整形记</title>
+    <meta name="Keywords" content="整形,整容,微整形,整形问答,整形日记,整形科普,肉毒素,玻尿酸" />
+    <meta name="Description" content="整形记是爱美人士交流和分享的社区，提供真实负责任的内容，你可以在这里阅读、分享、交流、提问。整形记致力于让整形用户掌握了解与自己相关的整形信息。" />
+
+    <style>
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, 'Microsoft YaHei', sans-serif;
+    }
+    body, p, h1, h2, h3, h4, h5, h6, ul, ol, pre {
+        margin: 0;
+    }
+    @font-face {
+        font-family: 'FontAwesome';
+        src: url('/static/fonts/fontawesome-webfont.eot?v=4.0.3');
+        src: url('/static/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('/static/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('/static/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('/static/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    ul, ol, button, input { padding: 0; }
+    a { text-decoration: none; }
+    a:hover {color: #a9d014; }
+    li { list-style: none; }
+    nav { border-top: 3px solid #9ECB3F; }
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1em;
+        line-height: 1.5;
+        font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", SimHei, tahoma, sans-serif;
+        font-weight: normal;
+    }
+    .gbtitle {
+        overflow: hidden;
+        line-height: 1.8em;
+        background: 0;
+        margin: 0;
+        height: 42px;
+        padding: 0;
+        border-bottom: 1px solid #e9e9e9;
+        float: none;
+        clear: both;
+    }
+    .gbtitle h2,
+    .gbtitle h1 {
+        float: left;
+        font-weight: normal;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    .navbox {
+        min-height: 60px;
+        width: 1000px;
+        margin: 0 auto;
+    }
+    .navbox .logo {
+        float: left;
+        min-width: 120px;
+        padding-top: 8px;
+    }
+    .navbox .searchbox {
+        float: left;
+        min-width: 220px;
+        padding: 8px 0 0 10px;
+    }
+    .navbox .searchbox .aw-search-box {
+        margin: 5px 0 0 5px;
+    }
+    .navbox .searchbox .navbar-search .form-control {
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        font-size: 12px;
+        padding: 6px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+    .navbox .searchbox .navbar-search .input-group-addon {
+        border: 1px solid #ccc;
+        border-left: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        padding: 6px 12px;
+        font-size: 12px;
+        color: #555;
+        text-align: center;
+        background-color: #eee;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .navbox .searchbox .navbar-search .fa {
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .navbox .searchbox .navbar-search .fa-search:before {
+        content: "\f002";
+    }
+    .navbox .navlink {
+        float: left;
+        min-width: 200px;
+    }
+    .navbox .navlogin {
+        float: right;
+        min-width: 160px;
+    }
+    .navbox .nav {
+        padding-left: 0;
+        list-style: none;
+        float: left;
+        margin-top: 17px;
+    }
+    .navbox .nav > li {
+        float: left;
+        position: relative;
+        display: block;
+    }
+    .navbox .nav > li a {
+        font-size: 18px;
+        background: #fff;
+        color: #bbb;
+        text-decoration: none;
+        padding: 15px;
+    }
+    .navbox .nav > li a:hover {
+        background: #9ECB3F;
+        color: #fff;
+    }
+    .loginbox {
+        min-height: 30px;
+        width: 1000px;
+        margin: 0 auto 10px auto;
+    }
+    .maincontent {
+        min-height: 480px;
+        display: flex;
+        width: 1000px;
+        margin: 0 auto;
+    }
+    .maincontent .leftside {
+        float: left;
+        flex: 1;
+    }
+    .leftside .recos {
+        margin: 20px 0 0;
+        height: 250px;
+    }
+    .leftside .focus {
+        float: left;
+        overflow: hidden;
+        margin-top: 5px;
+        position: relative;
+        width: 330px;
+    }
+    .leftside .focus .focus-content {
+        position: relative;
+        height: 235px;
+    }
+    .leftside .focus .focus-explain {
+        bottom: 0;
+        position: absolute;
+        background: url(/pub/images/g_footer_layer_bg.png);
+        width: 100%;
+    }
+    .leftside .focus .focus-title {
+        height: 32px;
+        overflow: hidden;
+    }
+    .leftside .focus .focus-title li {
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        margin-top: 12px;
+    }
+    .leftside .focus .focus-title a {
+        font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", SimHei, tahoma, sans-serif;
+        font-size: 16px;
+    }
+    .leftside .focus .focus-title .current a {
+        display: block;
+        text-align: center;
+        color: #e9e9e9;
+    }
+    .leftside .focus .focus-tag {
+        margin: 8px 0;
+        overflow: hidden;
+        text-align: center;
+        position: relative;
+    }
+    .leftside .focus .focus-tag .current {
+        background-color: #88c932;
+    }
+    .leftside .focus .focus-tag li {
+        width: 8px;
+        height: 8px;
+        overflow: hidden;
+        line-height: 999em;
+        display: inline-block;
+        margin: 0 6px;
+        background-color: #e9e9e9;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+    }
+    .leftside .recos-article {
+        float: right;
+        width: 330px;
+        margin-top: 2px;
+        overflow: hiden;
+    }
+    .leftside .recos-article .stress,
+    .leftside .focus .recos-article .normal {
+        float: left;
+        width: 320px;
+        height: 24px;
+        margin: 0 0 7px 0;
+    }
+    .leftside .recos-article .stress a {
+        font-size: 16px;
+        color: #666;
+    }
+    .leftside .recos-article .stress a,
+    .leftside .focus .recos-article .normal a {
+        display: inline-block;
+        width: 100%;
+        height: 24px;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .gclear {
+        display: block;
+        min-height: 1%;
+    }
+    .gclear:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    .maincontent .virticalspace {
+        float: right;
+        width: 20px;
+        min-height: 10px;
+    }
+    .maincontent .rightside {
+        float: right;
+        width: 280px;
+    }
+    .footerbox {
+        min-height: 30px;
+        width: 1000px;
+        margin: 10px auto 0;
+        font-size: 12px;
+        color: #999;
+        overflow: hidden;
+        padding-bottom: 20px;
+        text-align: center;
+        line-height: 35px;
+    }
+    .footerbox .copyright {
+        border-top: 1px solid #ececec;
+    }
+
+    .leftside .contents {
+        line-height: 26px;
+    }
+    .leftside .contents .contents-l .content {
+        margin-bottom: -1px;
+        padding: 0 10px 16px 0;
+        overflow: hidden;
+        color: #999;
+        font-size: 14px;
+        width: 334px;
+        float: left;
+        overflow: hidden;
+    }
+    .leftside .contents .contents-l .content h2 {
+        font-size: 16px;
+        color: #333;
+        height: 49px;
+        line-height: 57px;
+        overflow: hidden;
+    }
+    .leftside .contents .contents-l .content ul {
+        padding-left: 15px;
+        height: 204px;
+        overflow: hidden;
+    }
+    .leftside .contents .contents-l .content li.content-article {
+        height: 100px;
+        overflow: hidden;
+        list-style-type: none;
+        margin-left: -15px;
+        word-wrap: break-word;
+    }
+    .leftside .contents .contents-l .content li.content-article .img {
+        float: left;
+        position: relative;
+        width: 135px;
+        height: 90px;
+    }
+    .leftside .contents .contents-l .content a {
+        color: #666;
+    }
+    .leftside .contents .contents-l .content a:visited {
+        color: #999;
+    }
+    .leftside .contents .contents-l .content li.content-article img {
+        vertical-align: top;
+        width: 135px;
+        height: 90px;
+        border: 0;
+    }
+    .leftside .contents .contents-l .content li.content-article .img b {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        transition: opacity .25s ease-in-out;
+    }
+    .leftside .contents .contents-l .content li.content-article .cont {
+        overflow: hidden;
+    }
+    .leftside .contents .contents-l .content li.content-article .cont h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 10px;
+        height: 42px;
+        overflow: hidden;
+    }
+    .leftside .contents .contents-l .content li.content-article .cont h3 a {
+        color: #666;
+        font-weight: bold;
+    }
+    .leftside .contents .contents-l .content li.content-article .cont p {
+        margin-left: 10px;
+        margin-top: 10px;
+        height: 48px;
+        overflow: hidden;
+        line-height: 1.67;
+        font-size: 12px;
+    }
+    .leftside .contents .contents-l .content li.content-article .cont p a {
+        color: #a9d014;
+    }
+    .leftside .contents .contents-l .content li {
+        list-style-type: square;
+        word-wrap: break-word;
+    }
+    .hotquestion {
+        min-height: 300px;
+    }
+    .hotquestion .answer {
+        color: #37A4D3;
+        border-bottom: 1px solid #C2E6F5;
+    }
+    .hotdiary {
+        min-height: 300px;
+    }
+    .hotdiary .diary {
+        color: #25B05B;
+        border-bottom: 1px solid #BEEFD1;
+    }
+    .rightside .hotusers {
+        padding-top: 40px;
+    }
+    .rightside .side-title {
+        margin-top: 17px;
+        min-height: 20px;
+    }
+    .rightside .side-title h2 {
+        float: left;
+        font-size: 16px;
+        font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", SimHei, tahoma, sans-serif;
+        line-height: 16px;
+        margin-right: 5px;
+        color: #333;
+    }
+    .rightside .side-group {
+        margin-top: 18px;
+        margin-bottom: 30px;
+    }
+    .rightside .side-group li {
+        margin-bottom: 20px;
+        height: 50px;
+        position: relative;
+        overflow: hidden;
+    }
+    .rightside .side-group li .pt-pic {
+        float: left;
+        margin-right: 20px;
+        _margin-right: 10px;
+        height: 48px;
+        color: #a9d014;
+    }
+    .rightside .side-group li .pt-pic img {
+        border-radius: 5px;
+        border: 1px solid #ededed;
+    }
+    .rightside .side-group li .pt-pic img,
+    .rightside .side-group li .pt-pic h3 {
+        display: block;
+        float: left;
+    }
+    .rightside .side-group li .pt-pic h3 {
+        font-size: 1em;
+        margin: 10px;
+    }
+    .rightside .side-title-border {
+        margin: 15px 0;
+        border-top: 1px #eaeaea solid;
+    }
+    .rightside .side-title-border h2 {
+        margin-top: 15px;
+        float: left;
+        font-size: 16px;
+        font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", SimHei, tahoma, sans-serif;
+        line-height: 16px;
+        margin-right: 5px;
+    }
+    .rightside .side-post {
+        width: 100%;
+        overflow: hidden;
+    }
+    .rightside .side-post ul li,
+    .index-page .side .side-zone ul li {
+        height: 22px;
+        margin-bottom: 2px;
+        margin-right: 10px;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .rightside .side-post ul li .prefix-dot {
+        display: inline-block;
+        width: 3px;
+        height: 3px;
+        background: #d2d2d2;
+        margin: 0 7px 3px 3px;
+    }
+    .rightside a {
+        font-size: 12px;
+        color: #666;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="pagecontainer">
+        <header>
+            <nav>
+                <div class="navbox">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="/static/css/default/img/logo.png" border="0" alt="整形记是爱美人士交流和分享的社区">
+                        </a>
+                    </div>
+                    <div class="searchbox">
+                        <!-- 搜索框 -->
+                        <div class="aw-search-box">
+                            <form class="navbar-search" action="/search/" id="global_search_form" method="post">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="搜索问题、话题或人" autocomplete="off" name="q" id="aw-search-query" class="search-query" /><span class="input-group-addon" title="搜索" id="global_search_btns" onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end 搜索框 -->
+                    </div>
+                    <div class="navlink">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/explore/">问答</a>
+                            </li>
+                            <li><a href="/article/square/">日记</a>
+                            </li>
+                            <li><a href="/topic/">话题</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navlogin">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/account/login/">注册</a>
+                            </li>
+                            <li><a href="/account/register/">登录</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="loginbox">
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="maincontent">
+                <section class="leftside">
+                    <div class="newsupdate">
+                        <div class="gbtitle">
+                            <h1>最新推荐</h1>
+                        </div>
+                        <div class="recos gclear">
+                            <!--以下是首页轮播器代码-->
+                            <div class="focus">
+                                <div class="focus-content">
+
+                                    <a href="http://www.guokr.com/article/439431/" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">
+                                        <img width="330" height="235" src="http://3.im.guokr.com/oTBPc4W70-BMEhWsk-5j_Tm5kEu5qeqv73UaAb8kbD9KAQAA6wAAAEpQ.jpg" alt="怎样的人更容易对同性恋产生偏见？">
+                                    </a>
+
+                                    <a href="http://www.guokr.com/article/439429/" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">
+                                        <img width="330" height="235" src="http://1.im.guokr.com/VoCFHQGWpP3DHOSibzHyInDHDzxeq7nK6mf01Rk8zctKAQAA4wAAAEpQ.jpg" alt="果壳网专访：对话《科学美国人》总编">
+                                    </a>
+
+                                    <a href="http://www.guokr.com/article/439418/" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">
+                                        <img width="330" height="235" src="http://3.im.guokr.com/SjrWTZ6_GKaXhoaisSyUxAhhgIli8hPCl02dr-sjBH5KAQAA6wAAAEpQ.jpg" alt="为纽扣电池穿上安全外衣">
+                                    </a>
+
+                                    <a href="http://www.guokr.com/article/439416/" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">
+                                        <img width="330" height="235" src="http://2.im.guokr.com/q81wj7NxbVoGu94tKCzIEBLEnVMKU37yxAjS1yRJ37lKAQAA6wAAAEpQ.jpg" alt="违反规则的人，被冷落多于被指责">
+                                    </a>
+
+                                    <a href="http://www.guokr.com/article/439414/" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">
+                                        <img width="330" height="235" src="http://3.im.guokr.com/vz6gZJTYXXVbcEuMPgVlkR8GNP910fS0e-Xl1ZEGTOtKAQAABgEAAEpQ.jpg" alt="汪星人里为什么出不了爱因斯坦？">
+                                    </a>
+
+                                </div>
+                                <div class="focus-explain">
+                                    <ul class="focus-title">
+
+                                        <li class="current">
+                                            <a href="http://www.guokr.com/article/439431/" title="怎样的人更容易对同性恋产生偏见？" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">怎样的人更容易对同性恋产生偏见？</a>
+                                        </li>
+
+                                        <li class="current">
+                                            <a href="http://www.guokr.com/article/439429/" title="果壳网专访：对话《科学美国人》总编" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">果壳网专访：对话《科学美国人》总编</a>
+                                        </li>
+
+                                        <li class="current">
+                                            <a href="http://www.guokr.com/article/439418/" title="为纽扣电池穿上安全外衣" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">为纽扣电池穿上安全外衣</a>
+                                        </li>
+
+                                        <li class="current">
+                                            <a href="http://www.guokr.com/article/439416/" title="违反规则的人，被冷落多于被指责" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">违反规则的人，被冷落多于被指责</a>
+                                        </li>
+
+                                        <li class="current">
+                                            <a href="http://www.guokr.com/article/439414/" title="汪星人里为什么出不了爱因斯坦？" data-gaevent="home_recommend_articles_focus:v1.1.1.1:article" target="_blank">汪星人里为什么出不了爱因斯坦？</a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="focus-tag">
+
+                                        <li class="current"></li>
+
+                                        <li></li>
+
+                                        <li></li>
+
+                                        <li></li>
+
+                                        <li></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- 首页轮播器结束 -->
+
+                            <div class="recos-article">
+                                <ul class="gclear">
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/439430/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="银心大黑洞，说好的爆发呢？" target="_blank">银心大黑洞，说好的爆发呢？</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/438177/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="以白为美，哪怕是病" target="_blank">以白为美，哪怕是病</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/438207/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="杀人于无形：西方植物毒药史" target="_blank">杀人于无形：西方植物毒药史</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/439421/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="“读心术”，真的可以有" target="_blank">“读心术”，真的可以有</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/439422/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="怎样的慈善机构更吸引人慷慨解囊？" target="_blank">怎样的慈善机构更吸引人慷慨解囊？</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/439426/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="小三上位，注定也没好结果" target="_blank">小三上位，注定也没好结果</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/439424/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="晒太阳控制体重，维生素D可不行" target="_blank">晒太阳控制体重，维生素D可不行</a>
+                                        </h2>
+                                    </li>
+
+                                    <li class="stress">
+                                        <h2><a href="http://www.guokr.com/article/439415/" data-gaevent="home_recommend_articles:v1.1.1.1:article" title="同性恋：从被诅咒到被祝福" target="_blank">同性恋：从被诅咒到被祝福</a>
+                                        </h2>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hotquestion">
+                        <div class="gbtitle answer">
+                            <h1>热门问答</h1>
+                        </div>
+                        <div class="contents gclear">
+                            <div class="contents-l">
+                                <div class="content">
+                                    <h2 class="content-title">科学·技术</h2>
+                                    <ul>
+                                        <li class="content-article">
+                                            <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank" class="img">
+                                                <img src="http://2.im.guokr.com/2skd1VxS0SL2p2rNoUnU-chYZML_AeLKKwB9NBx-enDyAQAATAEAAEpQ.jpg?imageView2/1/w/135/h/90" alt="“NASA证实地球12月16进入6天黑夜”是真的吗？" /><b></b>
+                                            </a>
+                                            <div class="cont">
+                                                <h3><a href="http://www.guokr.com/question/582601/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="“NASA证实地球12月16进入6天黑夜”是真的吗？">“NASA证实地球12月16进入6天黑夜”是真的吗？</a>
+                                                </h3>
+                                                <p>面对大部分流言，即使你没有任何相关专业背景，... <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank">详细</a>
+                                                </p>
+                                            </div>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582535/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="这个“北京污染最严重时段数据”能说明什么？">这个“北京污染最严重时段数据”能说明什么？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582678/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="远距离中枪的时候是先中枪还是先听见枪声？">远距离中枪的时候是先中枪还是先听见枪声？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582630/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="市面上的超声波电子驱鼠器真的有用吗？">市面上的超声波电子驱鼠器真的有用吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/570006/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="粒子的自旋是什么意思？">粒子的自旋是什么意思？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/481181/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="人睡着时闻不到气味吗？">人睡着时闻不到气味吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582424/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="所谓“扇翼机”这个东西是真的吗？">所谓“扇翼机”这个东西是真的吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582565/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="管道货物运输实现的困难点在哪？">管道货物运输实现的困难点在哪？</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <div class="content">
+                                    <h2 class="content-title">科学·技术</h2>
+                                    <ul>
+
+
+                                        <li class="content-article">
+                                            <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank" class="img">
+                                                <img src="http://2.im.guokr.com/2skd1VxS0SL2p2rNoUnU-chYZML_AeLKKwB9NBx-enDyAQAATAEAAEpQ.jpg?imageView2/1/w/135/h/90" alt="“NASA证实地球12月16进入6天黑夜”是真的吗？" /><b></b>
+                                            </a>
+                                            <div class="cont">
+                                                <h3><a href="http://www.guokr.com/question/582601/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="“NASA证实地球12月16进入6天黑夜”是真的吗？">“NASA证实地球12月16进入6天黑夜”是真的吗？</a>
+                                                </h3>
+                                                <p>面对大部分流言，即使你没有任何相关专业背景，... <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank">详细</a>
+                                                </p>
+                                            </div>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582535/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="这个“北京污染最严重时段数据”能说明什么？">这个“北京污染最严重时段数据”能说明什么？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582678/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="远距离中枪的时候是先中枪还是先听见枪声？">远距离中枪的时候是先中枪还是先听见枪声？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582630/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="市面上的超声波电子驱鼠器真的有用吗？">市面上的超声波电子驱鼠器真的有用吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/570006/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="粒子的自旋是什么意思？">粒子的自旋是什么意思？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/481181/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="人睡着时闻不到气味吗？">人睡着时闻不到气味吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582424/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="所谓“扇翼机”这个东西是真的吗？">所谓“扇翼机”这个东西是真的吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582565/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="管道货物运输实现的困难点在哪？">管道货物运输实现的困难点在哪？</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hotdiary">
+                        <div class="gbtitle diary">
+                            <h1>热门日记</h1>
+                        </div>
+                        <div class="contents gclear">
+                            <div class="contents-l">
+                                <div class="content">
+                                    <h2 class="content-title">科学·技术</h2>
+                                    <ul>
+                                        <li class="content-article">
+                                            <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank" class="img">
+                                                <img src="http://2.im.guokr.com/2skd1VxS0SL2p2rNoUnU-chYZML_AeLKKwB9NBx-enDyAQAATAEAAEpQ.jpg?imageView2/1/w/135/h/90" alt="“NASA证实地球12月16进入6天黑夜”是真的吗？" /><b></b>
+                                            </a>
+                                            <div class="cont">
+                                                <h3><a href="http://www.guokr.com/question/582601/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="“NASA证实地球12月16进入6天黑夜”是真的吗？">“NASA证实地球12月16进入6天黑夜”是真的吗？</a>
+                                                </h3>
+                                                <p>面对大部分流言，即使你没有任何相关专业背景，... <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank">详细</a>
+                                                </p>
+                                            </div>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582535/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="这个“北京污染最严重时段数据”能说明什么？">这个“北京污染最严重时段数据”能说明什么？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582678/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="远距离中枪的时候是先中枪还是先听见枪声？">远距离中枪的时候是先中枪还是先听见枪声？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582630/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="市面上的超声波电子驱鼠器真的有用吗？">市面上的超声波电子驱鼠器真的有用吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/570006/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="粒子的自旋是什么意思？">粒子的自旋是什么意思？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/481181/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="人睡着时闻不到气味吗？">人睡着时闻不到气味吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582424/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="所谓“扇翼机”这个东西是真的吗？">所谓“扇翼机”这个东西是真的吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582565/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="管道货物运输实现的困难点在哪？">管道货物运输实现的困难点在哪？</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <div class="content">
+                                    <h2 class="content-title">科学·技术</h2>
+                                    <ul>
+
+
+                                        <li class="content-article">
+                                            <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank" class="img">
+                                                <img src="http://2.im.guokr.com/2skd1VxS0SL2p2rNoUnU-chYZML_AeLKKwB9NBx-enDyAQAATAEAAEpQ.jpg?imageView2/1/w/135/h/90" alt="“NASA证实地球12月16进入6天黑夜”是真的吗？" /><b></b>
+                                            </a>
+                                            <div class="cont">
+                                                <h3><a href="http://www.guokr.com/question/582601/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="“NASA证实地球12月16进入6天黑夜”是真的吗？">“NASA证实地球12月16进入6天黑夜”是真的吗？</a>
+                                                </h3>
+                                                <p>面对大部分流言，即使你没有任何相关专业背景，... <a href="http://www.guokr.com/question/582601/" data-gaevent="home_recommend_asks:v1.1.1.1:ask" target="_blank">详细</a>
+                                                </p>
+                                            </div>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582535/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="这个“北京污染最严重时段数据”能说明什么？">这个“北京污染最严重时段数据”能说明什么？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582678/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="远距离中枪的时候是先中枪还是先听见枪声？">远距离中枪的时候是先中枪还是先听见枪声？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582630/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="市面上的超声波电子驱鼠器真的有用吗？">市面上的超声波电子驱鼠器真的有用吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/570006/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="粒子的自旋是什么意思？">粒子的自旋是什么意思？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/481181/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="人睡着时闻不到气味吗？">人睡着时闻不到气味吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582424/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="所谓“扇翼机”这个东西是真的吗？">所谓“扇翼机”这个东西是真的吗？</a>
+                                        </li>
+
+
+
+                                        <li><a href="http://www.guokr.com/question/582565/" target="_blank" data-gaevent="home_recommend_asks:v1.1.1.1:ask" title="管道货物运输实现的困难点在哪？">管道货物运输实现的困难点在哪？</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="virticalspace"></div>
+                <section class="rightside">
+                    <div class="hotusers">
+                        <div class="side-title gclear">
+                            <h2>热门用户</h2>
+                        </div>
+                        <div>
+                            <ul class="side-group ">
+                                <li>
+                                    <a href="/people/总编大人" title="总编大人" target="_blank" class="pt-pic">
+                                        <img width="48" height="48" src="/uploads/avatar/000/00/00/03_avatar_mid.jpg" alt="总编大人" />
+                                        <h3>总编大人</h3>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/people/胡美人" title="胡美人" target="_blank" class="pt-pic">
+                                        <img width="48" height="48" src="/uploads/avatar/000/00/00/02_avatar_mid.jpg" alt="胡美人" />
+                                        <h3>胡美人</h3>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/people/上进小苹果" title="上进小苹果" target="_blank" class="pt-pic">
+                                        <img width="48" height="48" src="/uploads/avatar/000/00/00/06_avatar_mid.jpg" alt="上进小苹果" />
+                                        <h3>上进小苹果</h3>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hottopic">
+                        <div class="side-title-border gclear">
+                            <h2>热门话题</h2>
+                        </div>
+                        <div class="side-post gclear">
+                            <ul>
+                                <li><b class="prefix-dot"></b><a href="/question/86" title="哪些人不适合打瘦脸针？" target="_blank">哪些人不适合打瘦脸针？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/117" title="平时该注意些什么，能让法令纹来得更晚一些呢？" target="_blank">平时该注意些什么，能让法令纹来得更晚一些呢？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/114" title="为什么美容医院的玻尿酸价格比医院便宜很多呢？" target="_blank">为什么美容医院的玻尿酸价格比医院便宜很多呢？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/101" title="自体脂肪是怎么移植的？" target="_blank">自体脂肪是怎么移植的？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/100" title="怎么区别眼袋和卧蚕？" target="_blank">怎么区别眼袋和卧蚕？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/70" title="冰点除皱有什么禁忌？" target="_blank">冰点除皱有什么禁忌？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/67" title="孕妇可以用果酸吗？" target="_blank">孕妇可以用果酸吗？</a>
+                                </li>
+                                <li><b class="prefix-dot"></b><a href="/question/56" title="注射羊胎素有没有副作用？" target="_blank">注射羊胎素有没有副作用？</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <footer>
+            <div class="footerbox">
+                <div class="bottomnav">&nbsp;</div>
+                <div class="copyright">©2014 整形记 &nbsp;京ICP备88888888号 &nbsp; 京公网安备8888888888</div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
